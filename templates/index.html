@@ -1,0 +1,32 @@
+{%extends "base.html"%}
+
+{%block content%}
+<h1>Events</h1>
+
+<!-- let's put input form here -->
+<form action="/addevents" method="post"> <!-- ADDED -->
+  <label for="date">Date</label>
+  <input type="date" name="date" id="date" value="2022-03-14" min="1990-01-01" max="2022-03-14">
+  <label for="name">Name</label>
+  <textarea name="name" rows="1" cols="30"></textarea>
+  <label for="room">Room</label>
+  <input type="text" name="room" id="room">
+  <label for="description">Description</label>
+  <input type="text" name="description" id="description">
+  <label for="recurring">Recurring[Y/N]</label>
+  <input type="text" name="recurring" id="recurring">
+<input type="submit" value="Add Event">
+</form>
+
+{% for event in all_events %}  
+
+  <div>
+    <p>
+      {{ event.name }}: {{ event.description }}: {{event.date}}: {{event.room}}
+      {% if event.recurring == True %}
+        <span>(recurring)</span>
+      {% endif %}
+    </p>
+  </div>
+{% endfor %}
+{% endblock %}
